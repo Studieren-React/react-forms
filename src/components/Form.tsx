@@ -7,10 +7,11 @@ const EMAIL_PATTERN: RegExp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 export class Form extends Component {
     state = {
         userName: '',
-        userEmail: ''
+        userEmail: '',
+        userMessage: ''
     };
 
-    handleChange = (event: React.FormEvent<HTMLInputElement>): void => {
+    handleChange = (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
         this.setState({[event.currentTarget.name]: event.currentTarget.value})
     }
 
@@ -31,7 +32,7 @@ export class Form extends Component {
     }
 
     render() {
-        const { userName, userEmail } = this.state;
+        const { userName, userEmail, userMessage } = this.state;
 
         return (
             <div className="Form">
@@ -52,6 +53,13 @@ export class Form extends Component {
                     value={userEmail}
                     onChange={this.handleChange}
                     onBlur={this.emailValidator}
+                />
+                <br />
+                <textarea
+                    className="FormInput"
+                    name="userMessage"
+                    value={userMessage}
+                    onChange={this.handleChange}
                 />
             </div>
         )
