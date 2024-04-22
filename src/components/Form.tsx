@@ -1,6 +1,9 @@
 import { Component } from "react";
 import './Form.css';
 
+const NAME_LENGTH: number = 10;
+const EMAIL_PATTERN: RegExp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
 export class Form extends Component {
     state = {
         userName: '',
@@ -9,6 +12,22 @@ export class Form extends Component {
 
     handleChange = (event: React.FormEvent<HTMLInputElement>): void => {
         this.setState({[event.currentTarget.name]: event.currentTarget.value})
+    }
+
+    nameValidator = () => {
+        const { userName } = this.state;
+        
+        if (userName.length < NAME_LENGTH) {
+            console.error(`The name length ${userName.length} must be greater than ${NAME_LENGTH}`);
+        }
+    }
+
+    emailValidator = () => {
+        const { userEmail } = this.state;
+
+        if (!EMAIL_PATTERN.test(userEmail)) {
+            console.error(`Email ${userEmail} isn't valid!`)
+        }
     }
 
     render() {
@@ -23,6 +42,7 @@ export class Form extends Component {
                     placeholder="user name"
                     value={userName}
                     onChange={this.handleChange}
+                    onBlur={this.nameValidator}
                 />
                 <input
                     className="FormInput"
@@ -31,6 +51,7 @@ export class Form extends Component {
                     placeholder="user email"
                     value={userEmail}
                     onChange={this.handleChange}
+                    onBlur={this.emailValidator}
                 />
             </div>
         )
