@@ -10,7 +10,8 @@ export class Form extends Component {
         userEmail: '',
         userMessage: '',
         userSelect: undefined,
-        userCheck: false
+        userCheck: false,
+        userGender: ''
     };
 
     handleChange = (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>): void => {
@@ -38,7 +39,7 @@ export class Form extends Component {
     }
 
     render() {
-        const { userName, userEmail, userMessage, userSelect, userCheck } = this.state;
+        const { userName, userEmail, userMessage, userSelect, userCheck, userGender } = this.state;
 
         return (
             <div className="Form">
@@ -87,6 +88,23 @@ export class Form extends Component {
                     />
                     User subscription
                 </label>
+                <br />
+                <div className="UserGender">
+                    <input
+                        type="radio"
+                        name="userGender"
+                        value="male"
+                        onChange={this.handleChange}
+                        checked={userGender === 'male'}
+                    /> Male
+                    <input
+                        type="radio"
+                        name="userGender"
+                        value="female"
+                        onChange={this.handleChange}
+                        checked={userGender === 'female'}
+                    /> Female
+                </div>
             </div>
         )
     }
