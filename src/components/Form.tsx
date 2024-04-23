@@ -9,11 +9,16 @@ export class Form extends Component {
         userName: '',
         userEmail: '',
         userMessage: '',
-        userSelect: undefined
+        userSelect: undefined,
+        userCheck: false
     };
 
     handleChange = (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>): void => {
         this.setState({[event.currentTarget.name]: event.currentTarget.value})
+    }
+
+    handleCheckboxChange = (event: React.FormEvent<HTMLInputElement>): void => {
+        this.setState({[event.currentTarget.name]: event.currentTarget.checked})
     }
 
     nameValidator = () => {
@@ -33,7 +38,7 @@ export class Form extends Component {
     }
 
     render() {
-        const { userName, userEmail, userMessage, userSelect } = this.state;
+        const { userName, userEmail, userMessage, userSelect, userCheck } = this.state;
 
         return (
             <div className="Form">
@@ -72,6 +77,16 @@ export class Form extends Component {
                     <option value="2">2</option>
                     <option value="3">3</option>
                 </select>
+                <br />
+                <label>
+                    <input
+                        type="checkbox"
+                        name="userCheck"
+                        checked={userCheck}
+                        onChange={this.handleCheckboxChange}
+                    />
+                    User subscription
+                </label>
             </div>
         )
     }
